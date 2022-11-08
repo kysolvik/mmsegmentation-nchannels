@@ -3,6 +3,7 @@ import os.path as osp
 
 import mmcv
 import numpy as np
+import skimage.io
 
 from ..builder import PIPELINES
 
@@ -21,12 +22,12 @@ class LoadImageFromFile(object):
             numpy array. If set to False, the loaded image is an uint8 array.
             Defaults to False.
         color_type (str): The flag argument for :func:`mmcv.imfrombytes`.
-            Defaults to 'color'.
+            Defaults to 'color'. NOT USED
         file_client_args (dict): Arguments to instantiate a FileClient.
-            See :class:`mmcv.fileio.FileClient` for details.
+            See :class:`mmcv.fileio.FileClient` for details. NOT USED
             Defaults to ``dict(backend='disk')``.
         imdecode_backend (str): Backend for :func:`mmcv.imdecode`. Default:
-            'cv2'
+            'cv2'. NOT USED
     """
 
     def __init__(self,
@@ -50,17 +51,14 @@ class LoadImageFromFile(object):
             dict: The dict contains loaded image and meta information.
         """
 
-        if self.file_client is None:
-            self.file_client = mmcv.FileClient(**self.file_client_args)
-
         if results.get('img_prefix') is not None:
             filename = osp.join(results['img_prefix'],
                                 results['img_info']['filename'])
         else:
             filename = results['img_info']['filename']
-        img_bytes = self.file_client.get(filename)
-        img = mmcv.imfrombytes(
-            img_bytes, flag=self.color_type, backend=self.imdecode_backend)
+
+        img = skimage.io.imread(filename)
+
         if self.to_float32:
             img = img.astype(np.float32)
 

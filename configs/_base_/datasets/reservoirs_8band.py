@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'CustomDataset'
-data_root = 'data/reservoirs_6band/'
+data_root = 'data/reservoirs_8band/'
 img_norm_cfg = dict(
     mean=[125.09924004, 162.62489442, 130.07100181,  99.07333485,
           65.60963343, 141.6956218 ,  91.84874383, 180.89670207],

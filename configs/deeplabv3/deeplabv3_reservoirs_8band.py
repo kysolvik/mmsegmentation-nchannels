@@ -8,13 +8,13 @@ model = dict(
         num_classes=2,
         out_channels=2,
     loss_decode=dict(
-        type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0, class_weight=[1.0, 175.],
+        type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0, class_weight=[1.0, 453.],
          )),
     auxiliary_head=dict(
         num_classes=2,
         out_channels=2,
     loss_decode=dict(
-        type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0, class_weight=[1.0, 175.],
+        type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0, class_weight=[1.0, 453.],
          ))
     )
 evaluation = dict(

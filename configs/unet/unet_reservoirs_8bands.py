@@ -4,17 +4,18 @@ _base_ = [
     '../_base_/default_runtime.py', '../_base_/schedules/schedule_40k.py'
 ]
 model = dict(
+    test_cfg=dict(crop_size=(512, 512), stride=(0, 0)),
     decode_head=dict(
         num_classes=2,
         out_channels=2,
     loss_decode=dict(
-        type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0, class_weight=[1.0, 150.], #100 was pretty good
+        type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0, class_weight=[0.5, 442.], #100 was pretty good
          )),
     auxiliary_head=dict(
         num_classes=2,
         out_channels=2,
     loss_decode=dict(
-        type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0, class_weight=[1.0, 150.], # 100 seemed to work pretty well
+        type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0, class_weight=[0.5, 442.], # 100 seemed to work pretty well
          ))
     )
 evaluation = dict(

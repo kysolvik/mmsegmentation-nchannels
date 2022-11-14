@@ -300,6 +300,7 @@ class UNet(BaseModule):
                  plugins=None,
                  pretrained=None,
                  init_cfg=None):
+        in_channels = 8
         super(UNet, self).__init__(init_cfg)
 
         self.pretrained = pretrained

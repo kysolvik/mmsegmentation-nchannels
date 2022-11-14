@@ -1,6 +1,6 @@
 _base_ = [
     '../_base_/models/pspnet_unet_s5-d16.py',
-    '../_base_/datasets/reservoirs_6band.py',
+    '../_base_/datasets/reservoirs_8band.py',
     '../_base_/default_runtime.py', '../_base_/schedules/schedule_40k.py'
 ]
 model = dict(

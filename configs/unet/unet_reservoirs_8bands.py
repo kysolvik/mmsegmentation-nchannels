@@ -4,7 +4,7 @@ _base_ = [
     '../_base_/default_runtime.py', '../_base_/schedules/schedule_40k.py'
 ]
 model = dict(
-    test_cfg=dict(crop_size=(512, 512), stride=(0, 0)),
+    test_cfg=dict(crop_size=(512, 512), stride=(1, 1)),
     decode_head=dict(
         num_classes=2,
         out_channels=2,

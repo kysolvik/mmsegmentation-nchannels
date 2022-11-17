@@ -9,13 +9,13 @@ model = dict(
         num_classes=2,
         out_channels=2,
     loss_decode=dict(
-        type='DiceLoss', loss_weight=1.0, class_weight=[0.5, 442.],
+        type='DiceLoss', loss_weight=1.0, exponent=1, class_weight=[0.5, 2.],
          )),
     auxiliary_head=dict(
         num_classes=2,
         out_channels=2,
     loss_decode=dict(
-        type='DiceLoss', loss_weight=1.0, class_weight=[0.5, 442.],
+        type='DiceLoss', loss_weight=1.0, exponent=1, class_weight=[0.5, 2.],
          ))
     )
 evaluation = dict(

@@ -46,7 +46,7 @@ data = dict(
         img_dir='img_dir/train',
         ann_dir='ann_dir/train',
         pipeline=train_pipeline,
-        palette=None),
+        palette=[[0,0,0],[255,255,255]]),
      val=dict(
         type=dataset_type,
         img_suffix='.tif',
@@ -56,7 +56,7 @@ data = dict(
         img_dir='img_dir/val',
         ann_dir='ann_dir/val',
         pipeline=test_pipeline,
-        palette=None),
+        palette=[[0,0,0],[255,255,255]]),
      test=dict(
         type=dataset_type,
         img_suffix='.tif',
@@ -66,6 +66,6 @@ data = dict(
         img_dir='img_dir/val',
         ann_dir='ann_dir/val',
         pipeline=test_pipeline,
-        palette=None)
+        palette=[[0,0,0],[255,255,255]]),
      )
 

@@ -1,6 +1,6 @@
 _base_ = [
-    './upernet_swin_base_patch4_window12_512x512_160k_ade20k_'
-    '../_base_/datasets/reservoirs_8band.py',
+     '../_base_/models/upernet_swin.py',
+     '../_base_/datasets/reservoirs_8band.py',
     '../_base_/default_runtime.py', '../_base_/schedules/schedule_40k.py'
 ]
 model = dict(
@@ -23,4 +23,3 @@ evaluation = dict(
 checkpoint_config = dict(  # Config to set the checkpoint hook, Refer to https://github.com/open-mmlab/mmcv/blob/master/mmcv/runner/hooks/checkpoint.py for implementation.
     by_epoch=False,  # Whether count by epoch or not.
     interval=1000)  # The save interval.
-

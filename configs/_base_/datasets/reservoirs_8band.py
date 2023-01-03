@@ -10,12 +10,12 @@ crop_size = (256, 256)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', reduce_zero_label=False),
-    dict(type='Resize', img_scale=(512, 512), ratio_range=(0.7, 1.5)),
+    dict(type='Resize', img_scale=(512, 512), ratio_range=(1.0, 1.5)),
     dict(type='RandomCrop', crop_size=crop_size, cat_max_ratio=1.0),
     dict(type='RandomFlip', prob=0.5),
 #     dict(type='PhotoMetricDistortion'),
     dict(type='Normalize', **img_norm_cfg),
-    dict(type='Pad', size=crop_size, pad_val=0, seg_pad_val=1),
+#     dict(type='Pad', size=crop_size, pad_val=0, seg_pad_val=1),
     dict(type='DefaultFormatBundle'),
     dict(type='Collect', keys=['img', 'gt_semantic_seg']),
 ]

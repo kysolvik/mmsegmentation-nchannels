@@ -1,7 +1,7 @@
 _base_ = [
      '../_base_/models/upernet_swin.py',
      '../_base_/datasets/reservoirs_8band.py',
-    '../_base_/default_runtime.py', '../_base_/schedules/schedule_40k.py'
+    '../_base_/default_runtime.py', '../_base_/schedules/schedule_40k_lowlr.py'
 ]
 model = dict(
     decode_head=dict(

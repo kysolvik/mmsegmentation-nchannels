@@ -130,6 +130,7 @@ def softmax_focal_loss(pred,
         final_weight = final_weight * pred.new_tensor(class_weight)
     if valid_mask is not None:
         final_weight = final_weight * valid_mask
+    final_weight = final_weight[:, 1]
     print(final_weight)
     loss = weight_reduce_loss(loss, final_weight, reduction, avg_factor)
     return loss

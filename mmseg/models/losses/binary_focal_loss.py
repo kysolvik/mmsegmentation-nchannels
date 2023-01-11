@@ -47,8 +47,45 @@ class BinaryFocalLoss(nn.Module):
                 target,
                 weight=None,
                 avg_factor=None,
-                reduction_override=None):
-        assert reduction_override in (None, 'none', 'mean', 'sum')
+                reduction_override=None,
+                ignore_index=255):
+        assert isinstance(ignore_index, int), \
+            'ignore_index must be of type int'
+        assert reduction_override in (None, 'none', 'mean', 'sum'), \
+            "AssertionError: reduction should be 'none', 'mean' or " \
+            "'sum'"
+        assert pred.shape == target.shape or \
+               (pred.size(0) == target.size(0) and
+                pred.shape[2:] == target.shape[1:]), \
+               "The shape of pred doesn't match the shape of target"
+
+        original_shape = pred.shape
+
+        # [B, C, d_1, d_2, ..., d_k] -> [C, B, d_1, d_2, ..., d_k]
+        pred = pred.transpose(0, 1)
+        # [C, B, d_1, d_2, ..., d_k] -> [C, N]
+        pred = pred.reshape(pred.size(0), -1)
+        # [C, N] -> [N, C]
+        pred = pred.transpose(0, 1).contiguous()
+
+        if original_shape == target.shape:
+            # target with shape [B, C, d_1, d_2, ...]
+            # transform it's shape into [N, C]
+            # [B, C, d_1, d_2, ...] -> [C, B, d_1, d_2, ..., d_k]
+            target = target.transpose(0, 1)
+            # [C, B, d_1, d_2, ..., d_k] -> [C, N]
+            target = target.reshape(target.size(0), -1)
+            # [C, N] -> [N, C]
+            target = target.transpose(0, 1).contiguous()
+        else:
+            # target with shape [B, d_1, d_2, ...]
+            # transform it's shape into [N, ]
+            target = target.view(-1).contiguous()
+            valid_mask = (target != ignore_index).view(-1, 1)
+            # avoid raising error when using F.one_hot()
+            target = torch.where(target == ignore_index, target.new_tensor(0),
+                                 target)
+
         reduction = (
             reduction_override if reduction_override else self.reduction)
         loss = self.loss_weight * binary_focal_loss(

@@ -36,6 +36,7 @@ class BinaryFocalLoss(nn.Module):
         self.use_sigmoid=use_sigmoid
         self.reduction = reduction
         self.loss_weight = loss_weight
+        self.loss_name = 'loss_focal'
         if isinstance(alpha, list):
             self.alpha = torch.Tensor(alpha)
         else:

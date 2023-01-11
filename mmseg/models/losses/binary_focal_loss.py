@@ -9,7 +9,6 @@ from .utils import weighted_loss
 
 @weighted_loss
 def binary_focal_loss(pred, target, gamma=2.0, alpha=0.5, reduction='mean'):
-    assert pred.size() == target.size() and target.numel() > 0
 
     logpt = F.sigmoid(pred)
     logpt = logpt.gather(1, target)

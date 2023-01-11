@@ -31,7 +31,7 @@ def binary_focal_loss(pred, target, gamma=2.0, alpha=0.5, reduction='mean'):
 @LOSSES.register_module
 class BinaryFocalLoss(nn.Module):
     def __init__(self, gamma=2, alpha=0.5, reduction='mean', loss_weight=1.0, use_sigmoid=True):
-        super(FocalLoss, self).__init__()
+        super(BinaryFocalLoss, self).__init__()
         self.gamma = gamma
         self.use_sigmoid=use_sigmoid
         self.reduction = reduction

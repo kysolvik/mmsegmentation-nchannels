@@ -58,6 +58,8 @@ def weight_reduce_loss(loss, weight=None, reduction='mean', avg_factor=None):
         Tensor: Processed loss values.
     """
     # if weight is specified, apply element-wise weight
+    print(weight.dim())
+    print(loss.dim())
     if weight is not None:
         assert weight.dim() == loss.dim()
         if weight.dim() > 1:
